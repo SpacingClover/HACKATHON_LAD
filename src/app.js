@@ -9,8 +9,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Serve the static HTML file (e.g., index.html) from the 'public' folder
 app.get('/', (req, res) => {
-  // Directly send the index.html file from the public directory
-  res.sendFile(path.join(__dirname, '..', '/public', '/htmls','quiz.html'));
+    switch (req.url) {
+        case '/':
+            // Directly send the index.html file from the public directory
+            res.sendFile(path.join(__dirname, '..', '/public', '/htmls','quiz.html'));
+            break;
+        case '/question_data':
+            res.json({"thing":"hello world"});
+            break;
+        default:
+            res.status(404).send('404 Not Found');
+    }
+
 });
 
 // Start the Express server
