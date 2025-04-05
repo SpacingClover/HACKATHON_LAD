@@ -1,0 +1,15 @@
+{
+  "name": "hackathon_lad",
+  "version": "1.0.0",
+  "description": "2025 BeavHacks Hackathon project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
