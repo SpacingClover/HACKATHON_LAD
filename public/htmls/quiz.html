@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Quiz (2x2 Grid)</title>
+<style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  body {
+    background-color: white;
+  }
+
+  .image-grid-container {
+    border: 10px groove gray;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+    background: lightgray;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+  }
+
+  .image-grid > img {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+
+  .image-grid > img.selected {
+    border: 2px groove blue;
+  }
+
+  .latex-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .button-container button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .images-container {
+    height: 60vh;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom 10px;
+  }
+
+  .main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-container {
+    height: 40vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 50px;
+    background-color: lightblue;
+  }
+
+  .input-bar {
+    width: 100%;
+  }
+</style>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="main">
+    <div class="images-container">
+      <div class="image-grid-container">
+        <div class="image-grid">
+          <img src="https://placehold.co/150" alt="Image 1" data-image-id="1">
+          <img src="https://placehold.co/150" alt="Image 2" data-image-id="2">
+          <img src="https://placehold.co/150" alt="Image 3" data-image-id="3">
+          <img src="https://placehold.co/150" alt="Image 4" data-image-id="4">
+        </div>
+      </div>
+    </div>
+
+    <div class="input-container">
+      <div class="input-bar">
+        <div class="latex-container">
+          <div id="latex-display">
+            $$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$
+          </div>
+        </div>
+
+        <div class="button-container">
+          <button id="next-button">Next</button>
+          <button id="submit-button">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const images = document.querySelectorAll('.image-grid img');
+    let selectedImage = null;
+
+    images.forEach(img => {
+      img.addEventListener('click', () => {
+        if (selectedImage) {
+          selectedImage.classList.remove('selected');
+        }
+        img.classList.add('selected');
+        selectedImage = img;
+        console.log("selected image id: " + img.getAttribute("data-image-id"));
+      });
+    });
+
+    document.getElementById('next-button').addEventListener('click', () => {
+      console.log("next button clicked");
+      document.getElementById('latex-display').innerHTML = "$$ \\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2} $$";
+      MathJax.typeset();
+    });
+
+    document.getElementById('submit-button').addEventListener('click', () => {
+      console.log("submit button clicked");
+      if (selectedImage) {
+        console.log("User submitted image: " + selectedImage.getAttribute("data-image-id"));
+      } else {
+        console.log("User did not select an image");
+      }
+    });
+  </script>
+</body>
+</html>
