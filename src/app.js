@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import fs from "fs";
+import Groq from 'groq-sdk';
 
 const app = express();
 const port = 3000;
@@ -9,8 +10,7 @@ const port = 3000;
 const __dirname_org = path.dirname(new URL(import.meta.url).pathname);
 const __dirname =  __dirname_org.substring(1);
 const genAI = new GoogleGenerativeAI ('AIzaSyCD1iSWUxyIdmFKOCavslLCTTA-hsZ2l4Q');
-
-let aimodel = "groq";
+const groq = new Groq({ apiKey:'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'});
 
 const stored_question_data = [];
 // {
@@ -97,6 +97,36 @@ async function passtogemini(imagePath) {
     return result;
   }
 
+async function passtogroq(imagelink){
+  const chatCompletion = await groq.chat.completions.create({
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "approximate a equation to calculate the volume of the item in the picture! Only provide the final equation in the response. Use the naming convention as letter_ number. in the form v=. !!!!dont provide any information regarding what is in the picture!!! In latex text!!! Do not have any $ on the ends!!! all backslashes must be single backslashes! MUST BE VALID LATEX!!!!"
+
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": imagelink
+            }
+          }
+        ]
+      }
+    ],
+    "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+    "temperature": 1,
+    "max_completion_tokens": 1024,
+    "top_p": 1,
+    "stream": false,
+    "stop": null
+  });
+   return(chatCompletion.choices[0].message.content);
+}
+
 function rand_img_path_creator(){
   let newdata = chooseimage(path.join(__dirname, '../public/assets'));
   return (newdata[1]+ "/" +newdata[2]);
@@ -127,6 +157,15 @@ async function createQuestion() {
     // const latexEquation = '$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
     const latexEquation =  await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
+    const aimodel = "groq"; // remove later.
+    let latexEquation = '';
+    if(aimodel === 'gemini'){
+       latexEquation = await passtogemini(selectedImage[0]);
+       //'$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$'; //await passtogemini(selectedImage[0]);
+    }else{
+       latexEquation = await passtogroq("https://web.engr.oregonstate.edu/~renjitha/hacks/"+ imglink);
+       //'$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$'; //await passtogroq("https://web.engr.oregonstate.edu/~renjitha/hacks/"+ imglink);
+    }
 
     console.log(latexEquation);
 
