@@ -120,13 +120,16 @@ async function createQuestion() {
     console.log(imglink); 
     let images= [imglink,imglink,imglink,imglink];
 
-    for(let j=0;j<images.length-1;j++){
-      for(let i=j+1; i<images.length;i++){
+    for(let j=0;j<images.length;j++){
+      for(let i=0; i<images.length;i++){
+        if (j === i){
+          continue;
+        }
         images[i]= check_dupes(images[j],images[i]);
       }
     }
     console.log(images);
-    
+
     let uid = Math.floor((Math.random()*100)+1);
     let correctanswer = 1;
     stored_question_data.push({
