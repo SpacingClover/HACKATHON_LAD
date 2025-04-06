@@ -117,6 +117,16 @@ async function createQuestion() {
     const latexEquation = '$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
 
+    console.log(imglink); 
+    let images= [imglink,imglink,imglink,imglink];
+
+    for(let j=0;j<images.length-1;j++){
+      for(let i=j+1; i<images.length;i++){
+        images[i]= check_dupes(images[j],images[i]);
+      }
+    }
+    console.log(images);
+    
     let uid = Math.floor((Math.random()*100)+1);
     let correctanswer = 1;
     stored_question_data.push({
