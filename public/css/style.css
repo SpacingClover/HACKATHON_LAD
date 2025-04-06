@@ -5,7 +5,7 @@ html, body {
   }
 
   body {
-    background-color: #F8F8F8;
+    background-color: white;
   }
 
   .main {
@@ -17,7 +17,7 @@ html, body {
     /* The Bottom Grid */
 
   .image-grid-container {
-    border: 10px dashed #2374AB;
+    border: 10px ridge #2374AB;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -45,7 +45,7 @@ html, body {
 
   img:hover{
     background-color: #2374AB;
-    transform: scale(1.1, 1.1); transform-origin: center;
+    transform: scale(1.05, 1.05); transform-origin: center;
   }
 
   img{
@@ -57,18 +57,19 @@ html, body {
     /* The Equation */
 
   .latex-container {
-    margin-bottom: 20px;
     text-align: center;
-    background-color: #4b2d18; /* White background for LaTeX box */
-    border: 10px groove #dc8b54; /* Gray border for LaTeX box */
-    padding: 10px; /* Add some padding inside the latex box */
-    width: fit-content; /* Fit the content to the latex box */
-    margin: auto; /* center the latex box */
-    width: 100vh;
+    background-color: #B4D2E7;
+    border: 10px ridge #2374AB;
+    padding: 10px;
+    margin: auto; 
+    width: fit-content;
+    border-radius: 30px;
   }
 
   #latex-display{
-    color:white;
+    color:#4b2d18;
+    font-size: 20px;
+    padding: 10px;
   }
 
    /* The Buttons */
@@ -121,7 +122,7 @@ html, body {
     display: flex;
     align-items: flex-end;
     padding-bottom: 50px;
-    background-color: #33312E;
+    background-color: #333;
   }
 
   .input-bar {
@@ -138,23 +139,24 @@ html, body {
     align-items: center;
     justify-content: center;
   }
-
+  
    /* The Wrapper */
 
   .wrapper {
-    width: 250px; /* Set the desired width of the container */
-    height: 250px; /* Set the desired height of the container */
-    display: flex; /* Enable flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    overflow: hidden; /* Clip the image to the container */
+    width: 250px; 
+    height: 250px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    overflow: hidden; 
     border-radius: 10px;
+
   }
   
   .wrapper > img {
-    width: 90%; /* Make the image fill the container */
-    height: 90%; /* Make the image fill the container */
-    object-fit: cover; /* Maintain aspect ratio and cover the container */
+    width: 90%; 
+    height: 90%;
+    object-fit: cover;
     margin: 5px;
     border-radius: 10px;
     border: 10px solid #2374AB;
@@ -206,4 +208,50 @@ html, body {
     color: white;
     font-weight: bold;
     font-size: 18px;
+  }
+
+  /* Dropdown */
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
+    border-radius: 4px;
+    z-index: 1;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdown-content li {
+    padding: 8px 16px;
+    border-bottom: 10px solid #eee;
+  }
+
+  .dropdown-content li:last-child {
+    border-bottom: none;
+  }
+
+  .dropdown-content a {
+    display: block;
+    color: #333;
+    padding: 8px 0;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+  /* Selecting Image */
+
+  .selected{
+    background-color: red;
+  }
+
+  img.selected{
+    border-color: yellow;
   }

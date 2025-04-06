@@ -45,6 +45,7 @@ async function getNewQuestion(){
   }
   MathJax.typeset();
   selectedImage = null;
+  resetStuff();
 }
 
 async function submitAnswer(){
@@ -58,4 +59,10 @@ async function submitAnswer(){
   else{
     console.log("User did not select an image");
   }
+}
+
+function resetStuff(){
+  images.forEach(img => {
+    img.classList.remove('selected');
+  })
 }
