@@ -47,6 +47,9 @@ async function getNewQuestion(){
     else if(key==="uid"){
       question_uid = json[key];
     }
+    else if(key==="highscoreplayer"){
+      document.getElementById("highscore").innerHTML = "Highscore" + ":  " + json[key]["name"] + ":  " + json[key]["highscore"].toString();
+    }
   }
   selectedImage = null;
   document.body.style.backgroundColor = "white";

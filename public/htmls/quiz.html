@@ -16,8 +16,8 @@
           <li><a href="javascript:activateGemini()">Use Gemini</a></li>
           <li><a href='javascript:activateGroq()'>Use Groq AI</a></li>
         </ul>
-        <div class="score" id="score">
-          Score: 0
+        <div class="score">
+          <a href="/index"><p>logout</p></a>
         </div>
       </div>
     </nav>
@@ -51,20 +51,39 @@
       </div>
     </div>
 
-    <!-- <div style="
+    <div style="
       position: fixed;
-      bottom: 8%;
-      right: 4%;
+      bottom: 9%;
+      right: 7%;
       padding: 15px 25px;
-      width: 25%;
+      width: 70px;
       background: #B4D2E7;
       border: 12px ridge #2374AB;
       border-radius: 20px;
-      color: #2374AB;
+      color: black;
       font-weight: bold;
-      font-size: 40px;">
-      Select the 3D shape that matches with the given volume equation!
-    </div> -->
+      font-size: 1.5em;">
+      <div id="score">
+        Score: 0
+      </div>
+    </div>
+
+    <div style="
+      position: fixed;
+      bottom: 9%;
+      left: 7%;
+      padding: 15px 25px;
+      width: 150px;
+      background: #B4D2E7;
+      border: 12px ridge #2374AB;
+      border-radius: 20px;
+      color: black;
+      font-weight: bold;
+      font-size: 1.5em;">
+      <div id="highscore">
+        Score: 0
+      </div>
+    </div>
 
     <div class="button-container">
       <button id="submit-button">Submit</button>

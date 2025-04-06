@@ -16,9 +16,24 @@ const stored_question_data = [];
 // {
 //  "uid":123,
 //  "answer_index":n
-//}
+// }
+
+const users_data = [
+  {"name":"admin","password":"website","highscore":5},
+  {"name":"lohit","password":"website","highscore":12},
+  {"name":"coolcat","password":"website","highscore":2},
+];
+// {
+//   "name":"john doe",
+//   "password":"dqjiodfejiopf",
+//   "highscore":5
+// }
 
 app.use(express.static(path.join(__dirname, '../public')));
+
+app.get('/index', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/htmls/quiz.html'));
@@ -195,11 +210,46 @@ async function createQuestion(aimodel) {
       "img_3":images[2],
       "img_4":images[3],
       "equation":"$$"+latexEquation+"$$",//the back slashes must be double backslashes
-      "uid":uid
+      "uid":uid,
+      "highscoreplayer":findHighScorePlayer()
     });
 }
+
+app.get("/sign_in", (req,res) => {
+    for(let i=0;i<users_data.length;i++){
+      console.log(users_data[i]);
+      if(users_data[i]["name"] == req.query.name && users_data[i]["password"] == req.query.password){
+        res.json({"response":true});
+        return;
+      }
+    }
+    res.json({"response":false});
+});
 
 // Start the Express server
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
+
+function findHighScorePlayer(){
+  let hightestScore = 0;
+  let highScorePlayer = users_data[0];
+
+  for(let i=0;i<users_data.length;i++){
+    if(users_data[i]["highscore"] > highScorePlayer["highscore"]){
+      highScorePlayer = users_data[i];
+    }
+  }
+
+  if(highScorePlayer != null){
+    return({
+      "name":highScorePlayer["name"],
+      "highscore":highScorePlayer["highscore"]
+    });
+  }
+
+  return({
+    "name":"null",
+    "highscore":0
+  });
+}
