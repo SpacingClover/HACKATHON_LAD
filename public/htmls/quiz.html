@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Image Quiz (2x2 Grid)</title>
+<script src="/js/main.js" type="text/javascript"></script>
 <style>
   html, body {
     height: 100%;
@@ -45,11 +46,11 @@
   .latex-container {
     margin-bottom: 20px;
     text-align: center;
-    background-color: white; /* White background for LaTeX box */
-    border: 10px groove lightgray; /* Gray border for LaTeX box */
-    padding: 10px; /* Add some padding inside the latex box */
-    width: fit-content; /* Fit the content to the latex box */
-    margin: auto; /* center the latex box */
+    background-color: white;
+    border: 10px groove lightgray;
+    padding: 10px;
+    width: fit-content;
+    margin: auto;
   }
 
   .button-container {
@@ -99,10 +100,10 @@
     <div class="images-container">
       <div class="image-grid-container">
         <div class="image-grid">
-          <img src="https://placehold.co/150" alt="Image 1" data-image-id="1">
-          <img src="https://placehold.co/150" alt="Image 2" data-image-id="2">
-          <img src="https://placehold.co/150" alt="Image 3" data-image-id="3">
-          <img src="https://placehold.co/150" alt="Image 4" data-image-id="4">
+          <img src="https://placehold.co/150" alt="Image 1" id="1">
+          <img src="https://placehold.co/150" alt="Image 2" id="2">
+          <img src="https://placehold.co/150" alt="Image 3" id="3">
+          <img src="https://placehold.co/150" alt="Image 4" id="4">
         </div>
       </div>
     </div>
@@ -124,34 +125,61 @@
   </div>
 
   <script>
-    const images = document.querySelectorAll('.image-grid img');
-    let selectedImage = null;
 
-    images.forEach(img => {
-      img.addEventListener('click', () => {
-        if (selectedImage) {
-          selectedImage.classList.remove('selected');
-        }
-        img.classList.add('selected');
-        selectedImage = img;
-        console.log("selected image id: " + img.getAttribute("data-image-id"));
+      let selectedImage = "-1";
+
+      const image1 = document.getElementById('1');
+      const image2 = document.getElementById('2');
+      const image3 = document.getElementById('3');
+      const image4 = document.getElementById('4');
+      const images = [image1,image2,image3,image4];
+
+      images.forEach(img => {
+        img.addEventListener('click', () => {
+          if (selectedImage) {
+            images[parseInt(selectedImage)-1].classList.remove('selected');
+          }
+          img.classList.add('selected');
+          selectedImage = img.id;
+        });
       });
-    });
 
-    document.getElementById('next-button').addEventListener('click', () => {
-      console.log("next button clicked");
-      document.getElementById('latex-display').innerHTML = "$$ \\int_0^\\infty e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2} $$";
-      MathJax.typeset();
-    });
+      document.getElementById('next-button').addEventListener('click', getNewQuestion);
 
-    document.getElementById('submit-button').addEventListener('click', () => {
-      console.log("submit button clicked");
-      if (selectedImage) {
-        console.log("User submitted image: " + selectedImage.getAttribute("data-image-id"));
-      } else {
-        console.log("User did not select an image");
+      async function getNewQuestion(){
+        const json = await getData("get_question");
+        for(let key in json){
+          if(key==="equation"){
+            document.getElementById('latex-display').innerHTML = json[key];
+          }
+          else if(key==="img_1"){
+            image1.src = "http://localhost:3000/assets/" + json[key];
+          }
+          else if(key==="img_2"){
+            image2.src = "http://localhost:3000/assets/" + json[key];
+          }
+          else if(key==="img_3"){
+            image3.src = "http://localhost:3000/assets/" + json[key];
+          }
+          else if(key==="img_4"){
+            image4.src = "http://localhost:3000/assets/" + json[key];
+          }
+        }
+        MathJax.typeset();
+        selectedImage = "-1";
       }
-    });
+
+      document.getElementById('submit-button').addEventListener('click', () => {
+        console.log("submit button clicked");
+        if (selectedImage!="-1") {
+          console.log("User submitted image: " + selectedImage);
+        } else {
+          console.log("User did not select an image");
+        }
+      });
+
+      getNewQuestion();
+
   </script>
 </body>
 </html>

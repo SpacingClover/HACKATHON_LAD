@@ -1,12 +1,18 @@
-import { GoogleGenAI } from "@google/genai";
+async function getData(query){
+  const url = "http://localhost:3000/" + query;
+  console.log(url);
+  try{
+    const response = await fetch(url);
+    if (!response.ok) {
+      console.log("error");
+      // throw new Error(`Response status: ${response.status}`);
+    }
 
-const ai = new GoogleGenAI({ apiKey: "AIzaSyDTsyMVaXc8whJibBzyCLIT3lo08yGHKtQ" });
-
-async function main() {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.0-flash",
-    contents: "approximate a equation to calculate the volume of the item in the picture! Only provide the final equation in the response. Use the naming convention as letter_ number. in the form v=. !!!!dont provide any information regarding what is in the picture!!! In latex text!!!",});
-  console.log(response.text);
+    const json = await response.json();
+    console.log(json);
+    return json;
+  }
+  catch(error){
+    console.error(error.message);
+  }
 }
-
-main();
