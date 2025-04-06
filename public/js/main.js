@@ -2,6 +2,7 @@ const serveraddress = "http://localhost:3000/";
 const assetsaddress = serveraddress + "assets/";
 let question_uid = -1;
 
+
 async function getData(query){
   const url = serveraddress + query;
   console.log(url);
@@ -45,6 +46,7 @@ async function getNewQuestion(){
   }
   MathJax.typeset();
   selectedImage = null;
+  document.body.style.backgroundColor = "white";
 }
 
 async function submitAnswer(){
@@ -53,7 +55,12 @@ async function submitAnswer(){
     console.log("User submitted image: " + selectedAnswerIndex);
     let url = "check_answer" + "?question_uid=" + question_uid.toString() + "&answer=" + selectedAnswerIndex.toString();
     let result = await getData(url);
-    console.log(result["value"]);
+    if(result["value"]){
+      document.body.style.backgroundColor = "green";
+    }
+    else{
+      document.body.style.backgroundColor = "red";
+    }
   }
   else{
     console.log("User did not select an image");

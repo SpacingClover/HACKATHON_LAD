@@ -6,8 +6,8 @@ import fs from "fs";
 const app = express();
 const port = 3000;
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-//const __dirname =  __dirname_org.substring(1);
+const __dirname_org = path.dirname(new URL(import.meta.url).pathname);
+const __dirname =  __dirname_org.substring(1);
 const genAI = new GoogleGenerativeAI ('AIzaSyDTsyMVaXc8whJibBzyCLIT3lo08yGHKtQ');
 
 const stored_question_data = [];
@@ -117,7 +117,7 @@ async function createQuestion() {
     const latexEquation = '$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
 
-    console.log(imglink); 
+    console.log(imglink);
     let images= [imglink,imglink,imglink,imglink];
 
     for(let j=0;j<images.length;j++){
