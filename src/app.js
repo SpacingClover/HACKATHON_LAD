@@ -11,13 +11,10 @@ const __dirname =  __dirname_org.substring(1);
 const genAI = new GoogleGenerativeAI ('AIzaSyDTsyMVaXc8whJibBzyCLIT3lo08yGHKtQ');
 
 const stored_question_data = [];
-/*
-{
- "uid":123,
- "answer_index":n
-}
-
-*/
+// {
+//  "uid":123,
+//  "answer_index":n
+//}
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -125,7 +122,7 @@ return img2;
 
 async function createQuestion() {
     const selectedImage = chooseimage(path.join(__dirname, '../public/assets'));
-    const latexEquation = '$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
+    const latexEquation = '$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
 
     console.log(imglink);
@@ -155,7 +152,7 @@ async function createQuestion() {
       "img_2":images[1],
       "img_3":images[2],
       "img_4":images[3],
-      "equation":"$$"+latexEquation+"$$",//the back slashes must be double backslashes
+      "equation":latexEquation,//the back slashes must be double backslashes
       "uid":uid
     });
 }

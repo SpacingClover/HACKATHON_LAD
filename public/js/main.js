@@ -2,6 +2,8 @@ const serveraddress = "http://localhost:3000/";
 const assetsaddress = serveraddress + "assets/";
 let question_uid = -1;
 
+let score = 0;
+let answered = false;
 
 async function getData(query){
   const url = serveraddress + query;
@@ -47,6 +49,7 @@ async function getNewQuestion(){
   MathJax.typeset();
   selectedImage = null;
   document.body.style.backgroundColor = "white";
+  answered = false;
 }
 
 async function submitAnswer(){
@@ -56,7 +59,12 @@ async function submitAnswer(){
     let url = "check_answer" + "?question_uid=" + question_uid.toString() + "&answer=" + selectedAnswerIndex.toString();
     let result = await getData(url);
     if(result["value"]){
-      document.body.style.backgroundColor = "green";
+      if(!answered){
+        document.body.style.backgroundColor = "green";
+        score++;
+        answered = true;
+        document.getElementById("score").innerHTML = "Score " + score.toString();
+      }
     }
     else{
       document.body.style.backgroundColor = "red";
