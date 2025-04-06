@@ -68,17 +68,36 @@ async function passtogemini(imagePath) {
   }
 
 
+function check_dupes(img1, img2){
+  while(true){
+  if(img1 === img2){
+    let newdata = chooseimage(path.join(__dirname, '../public/assets'));
+    img2 = newdata[1]+ "/" +newdata[2];
+  }
+  else{
+    break;
+  }
+}
+return img2;
+}
+
 async function createQuestion() {
     const selectedImage = chooseimage(path.join(__dirname, '../public/assets'));
-    const latexEquation = await passtogemini(selectedImage[0]);
+    const latexEquation = '$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
     console.log(imglink); 
+    let images= [imglink,imglink,imglink,imglink];
+    for(let j=0;j<images.length-1;j++){
+      for(let i=j+1; i<images.length;i++){
+        images[i]= check_dupes(images[j],images[i]);
+      }
+    }
 
     return ({
-      "img_1":imglink,
-      "img_2":imglink,
-      "img_3":imglink,
-      "img_4":imglink,
+      "img_1":images[0],
+      "img_2":images[1],
+      "img_3":images[2],
+      "img_4":images[3],
       "equation":"$$"+latexEquation+"$$",//the back slashes must be double backslashes
       "uid":123
     });
