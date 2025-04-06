@@ -13,13 +13,10 @@ const genAI = new GoogleGenerativeAI ('AIzaSyCD1iSWUxyIdmFKOCavslLCTTA-hsZ2l4Q')
 const groq = new Groq({ apiKey:'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'});
 
 const stored_question_data = [];
-/*
-{
- "uid":123,
- "answer_index":n
-}
-
-*/
+// {
+//  "uid":123,
+//  "answer_index":n
+//}
 
 app.use(express.static(path.join(__dirname, '../public')));
 
@@ -162,10 +159,10 @@ async function createQuestion() {
     let latexEquation = '';
     if(aimodel === 'gemini'){
        latexEquation = await passtogemini(selectedImage[0]);
-       //'$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$'; //await passtogemini(selectedImage[0]);
+       //'$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$'; //await passtogemini(selectedImage[0]);
     }else{
        latexEquation = await passtogroq("https://web.engr.oregonstate.edu/~renjitha/hacks/"+ imglink); 
-       //'$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$'; //await passtogroq("https://web.engr.oregonstate.edu/~renjitha/hacks/"+ imglink);
+       //'$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$'; //await passtogroq("https://web.engr.oregonstate.edu/~renjitha/hacks/"+ imglink);
     }
 
     console.log(imglink);
@@ -195,7 +192,7 @@ async function createQuestion() {
       "img_2":images[1],
       "img_3":images[2],
       "img_4":images[3],
-      "equation":"$$"+latexEquation+"$$",//the back slashes must be double backslashes
+      "equation":latexEquation,//the back slashes must be double backslashes
       "uid":uid
     });
 }

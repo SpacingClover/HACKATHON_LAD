@@ -15,8 +15,15 @@
         <ul class="nav-links">
           <li><a href="#">Quiz</a></li>
           <li><a href="#">Leader Board</a></li>
+          <li class="dropdown">
+            <button id="drop">Models ▽</button>
+            <ul class="dropdown-content">
+              <li><a href="#">Groq</a></li>
+              <li><a href="#">Gemini</a></li>
+            </ul>
+          </li>
         </ul>
-        <div class="score">
+        <div class="score" id="score">
           Score: 42
         </div>
       </div>
@@ -51,6 +58,21 @@
       </div>
     </div>
 
+    <div style="
+      position: fixed;
+      bottom: 8%;
+      right: 4%;
+      padding: 15px 25px;
+      width: 25%;
+      background: #B4D2E7;
+      border: 12px ridge #2374AB;
+      border-radius: 20px;
+      color: #2374AB;
+      font-weight: bold;
+      font-size: 40px;">
+      Select the 3D shape that matches with the given volume equation!
+    </div>
+
     <div class="button-container">
       <button id="next-button">Next</button>
       <button id="submit-button">Submit</button>
@@ -59,6 +81,7 @@
   </div>
 
   <script>
+    
 
       let selectedImage = null;
 
