@@ -6,8 +6,8 @@ import fs from "fs";
 const app = express();
 const port = 3000;
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-//const __dirname =  __dirname_org.substring(1);
+const __dirname_org = path.dirname(new URL(import.meta.url).pathname);
+const __dirname =  __dirname_org.substring(1);
 const genAI = new GoogleGenerativeAI ('AIzaSyDTsyMVaXc8whJibBzyCLIT3lo08yGHKtQ');
 
 const stored_question_data = [];
@@ -98,12 +98,23 @@ async function passtogemini(imagePath) {
     return result;
   }
 
+function rand_img_path_creator(){
+  let newdata = chooseimage(path.join(__dirname, '../public/assets'));
+  return (newdata[1]+ "/" +newdata[2]);
+}
+
+function shufflelist(list) {
+  for (let i = list.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [list[i], list[j]] = [list[j], list[i]];
+  }
+  return list;
+}
 
 function check_dupes(img1, img2){
   while(true){
   if(img1 === img2){
-    let newdata = chooseimage(path.join(__dirname, '../public/assets'));
-    img2 = newdata[1]+ "/" +newdata[2];
+    img2 = rand_img_path_creator();
   }
   else{
     break;
@@ -117,8 +128,10 @@ async function createQuestion() {
     const latexEquation = '$$ \sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
 
-    console.log(imglink); 
-    let images= [imglink,imglink,imglink,imglink];
+    console.log(imglink);
+
+    let unshuf_images= [imglink,rand_img_path_creator(),rand_img_path_creator(),rand_img_path_creator()];
+    let images = shufflelist(unshuf_images);
 
     for(let j=0;j<images.length;j++){
       for(let i=0; i<images.length;i++){
@@ -128,13 +141,13 @@ async function createQuestion() {
         images[i]= check_dupes(images[j],images[i]);
       }
     }
-    console.log(images);
+    console.log(unshuf_images);
 
     let uid = Math.floor((Math.random()*100)+1);
-    let correctanswer = 1;
+    let correctanswer = (images.indexOf(imglink)+ 1);
     stored_question_data.push({
       "uid":uid,
-      "answer_index":1
+      "answer_index":correctanswer
     });
 
     return ({
