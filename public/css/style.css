@@ -8,76 +8,92 @@ html, body {
     background-color: #F8F8F8;
   }
 
-  .image-grid-container {
-    border: 10px dashed #2374AB;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    width: 25%;
-    background: #B4D2E7;
-    border-radius: 30px;
-  }
-
-  .image-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 150px);
-    grid-gap: 40px;
-    margin-bottom: 20px;
-    justify-content: center;
-  }
-
-  .image-grid > img {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    border: 4px solid transparent;
-
-  }
-
-  .image-grid > img.selected {
-    border: 2px groove rgb(0, 0, 0);
-  }
-
-  .latex-container {
-    margin-bottom: 20px;
-    text-align: center;
-    background-color: white; /* White background for LaTeX box */
-    border: 10px groove lightgray; /* Gray border for LaTeX box */
-    padding: 10px; /* Add some padding inside the latex box */
-    width: fit-content; /* Fit the content to the latex box */
-    margin: auto; /* center the latex box */
-  }
-
-  .button-container {
-    display: flex;
-    justify-content: center;
-  }
-
-  .button-container button {
-    margin: 0 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-  }
-
-  .images-container {
-    height: 60vh;
-    width: 100%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-
   .main {
     height: 100vh;
     display: flex;
     flex-direction: column;
   }
 
+    /* The Bottom Grid */
+
+  .image-grid-container {
+    border: 10px dashed #2374AB;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    width: 50%;
+    height: 50%;
+    background: #B4D2E7;
+    border-radius: 30px;
+  }
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 175px);
+    grid-gap: 25px;
+    align-items: center;
+    justify-content: center; /* Center horizontally */
+  }
+
+  .image-grid > img {
+    width: 100%;
+    cursor: pointer;
+    border: 4px solid #2374AB;
+    border-radius: 30px;
+  }
+  
+  .image-grid > img.selected {
+    border: 10px groove rgb(228, 0, 0);
+  }
+
+  img:hover{
+    background-color: #2374AB;
+    transform: scale(1.1, 1.1); transform-origin: center;
+  }
+
+  img{
+    transition: transform 0.2s ease;
+  }
+
+    /* The Equation */
+
+  .latex-container {
+    margin-bottom: 20px;
+    text-align: center;
+    background-color: #4b2d18; /* White background for LaTeX box */
+    border: 10px groove #dc8b54; /* Gray border for LaTeX box */
+    padding: 10px; /* Add some padding inside the latex box */
+    width: fit-content; /* Fit the content to the latex box */
+    margin: auto; /* center the latex box */
+    width: 50vh;
+  }
+
+  #latex-display{
+    color:white;
+  }
+
+   /* The Buttons */
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    height: 10vh;
+    margin: 30px;
+  }
+
+  .button-container button {
+    margin: 0 10px;
+    padding: 20px 20px;
+    font-size: 16px;
+    width: auto;
+    height: auto;
+  }
+
+  /* The Top */
+
   .input-container {
-    height: 40vh;
+    height: 30vh;
     display: flex;
     align-items: flex-end;
     padding-bottom: 50px;
@@ -86,4 +102,34 @@ html, body {
 
   .input-bar {
     width: 100%;
+  }
+
+   /* The Images */
+
+  .images-container {
+    height: 70vh;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+   /* The Wrapper */
+
+  .wrapper {
+    width: 200px; /* Set the desired width of the container */
+    height: 200px; /* Set the desired height of the container */
+    display: flex; /* Enable flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    overflow: hidden; /* Clip the image to the container */
+    border-radius: 60px;
+  }
+  
+  .wrapper > img {
+    width: 100%; /* Make the image fill the container */
+    height: 100%; /* Make the image fill the container */
+    margin: auto;
+    object-fit: cover; /* Maintain aspect ratio and cover the container */
   }
