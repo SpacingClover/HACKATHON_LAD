@@ -5,7 +5,7 @@ let question_uid = -1;
 let score = 0;
 let answered = false;
 
-let ai_model_to_use = "Gemini";
+let ai_model_to_use = "gemini";
 
 async function getData(query){
   const url = serveraddress + query;
@@ -26,7 +26,7 @@ async function getData(query){
 }
 
 async function getNewQuestion(){
-  const json = await getData("get_question");
+  const json = await getData("get_question?aimodel="+ai_model_to_use);
   console.log(json);
   for(let key in json){
     if(key==="equation"){
@@ -82,4 +82,14 @@ function resetStuff(){
   images.forEach(img => {
     img.classList.remove('selected');
   })
+}
+
+function activateGemini(){
+  ai_model_to_use = "gemini";
+  console.log("gemini");
+}
+
+function activateGroq(){
+  ai_model_to_use = "groq";
+  console.log("groq");
 }

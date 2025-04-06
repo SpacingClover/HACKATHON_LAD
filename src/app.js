@@ -30,7 +30,7 @@ async function get_question_callback(req,res){
 
   let response;
   try{
-    response = await createQuestion();
+    response = await createQuestion(req.query.aimodel);
     }
     catch(e){
       console.log(e.message);
@@ -152,12 +152,12 @@ function check_dupes(img1, img2){
 return img2;
 }
 
-async function createQuestion() {
+async function createQuestion(aimodel) {
     const selectedImage = chooseimage(path.join(__dirname, '../public/assets'));
     // const latexEquation = '$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
-    const latexEquation =  await passtogemini(selectedImage[0]);
+    // let latexEquation =  await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
-    const aimodel = "groq"; // remove later.
+    // const aimodel = "groq"; // remove later.
     let latexEquation = '';
     if(aimodel === 'gemini'){
        latexEquation = await passtogemini(selectedImage[0]);
