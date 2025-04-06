@@ -25,17 +25,15 @@ app.get("/get_question", (req,res) => {
   });
 });
 
-async function chooseimage(baseDir) {
+async function chooseimage(baseDir) {             
     const folders = fs.readdirSync(baseDir);
     const randomFolder = folders[Math.floor(Math.random() * folders.length)];
     const files = fs.readdirSync(path.join(baseDir, randomFolder));
     const randomFile = files[Math.floor(Math.random() * files.length)];
-    return path.join(baseDir, randomFolder, randomFile);
+    return path.join(baseDir, randomFolder, randomFile); 
 }
 
 async function passtogemini(imagePath) {
-
-    // const imagePath = path.resolve("path/to/your/image.jpg");
     const imageData = fs.readFileSync(imagePath).toString("base64");
     const mimeType = "image/jpeg";
 
@@ -55,7 +53,6 @@ async function passtogemini(imagePath) {
 
 
 async function createQuestion() {
-
     const selectedImage = chooseimage(path.join(__dirname, '../public/assets'));
     const latexEquation = await passtogemini(selectedImage);
     return latexEquation;
