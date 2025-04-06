@@ -13,10 +13,8 @@
     <nav>
       <div class="nav-container">
         <ul class="nav-links">
-          <li><a href="#">Quiz</a></li>
-          <li><a href="#">Leader Board</a></li>
-          <li><button type="button" onclick="activateGemini()">Use Gemini</button></li>
-          <li><button type="button" onclick="activateGroq()">Use Groq</button></li>
+          <li><a href="javascript:activateGemini()">Use Gemini</a></li>
+          <li><a href='javascript:activateGroq()'>Use Groq AI</a></li>
         </ul>
         <div class="score" id="score">
           Score: 0
@@ -53,7 +51,7 @@
       </div>
     </div>
 
-    <div style="
+    <!-- <div style="
       position: fixed;
       bottom: 8%;
       right: 4%;
@@ -66,11 +64,11 @@
       font-weight: bold;
       font-size: 40px;">
       Select the 3D shape that matches with the given volume equation!
-    </div>
+    </div> -->
 
     <div class="button-container">
-      <button id="next-button">Next</button>
       <button id="submit-button">Submit</button>
+      <button id="next-button">Next</button>
     </div>
 
   </div>
