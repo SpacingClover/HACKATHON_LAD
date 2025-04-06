@@ -6,8 +6,8 @@ import fs from "fs";
 const app = express();
 const port = 3000;
 
-const __dirname_org = path.dirname(new URL(import.meta.url).pathname);
-const __dirname =  __dirname_org.substring(1);
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+//const __dirname =  __dirname_org.substring(1);
 const genAI = new GoogleGenerativeAI ('AIzaSyDTsyMVaXc8whJibBzyCLIT3lo08yGHKtQ');
 
 const stored_question_data = [];

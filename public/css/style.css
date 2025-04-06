@@ -22,15 +22,15 @@ html, body {
     display: flex;
     justify-content: center;
     margin: auto;
-    width: 50%;
-    height: 50%;
+    width: fit-content;
+    height: fit-content;
     background: #B4D2E7;
     border-radius: 30px;
   }
 
   .image-grid {
     display: grid;
-    grid-template-columns: repeat(4, 175px);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 25px;
     align-items: center;
     justify-content: center; /* Center horizontally */
@@ -42,10 +42,6 @@ html, body {
     border: 4px solid #2374AB;
     border-radius: 30px;
   }
-  
-  .image-grid > img.selected {
-    border: 10px groove rgb(228, 0, 0);
-  }
 
   img:hover{
     background-color: #2374AB;
@@ -54,6 +50,8 @@ html, body {
 
   img{
     transition: transform 0.2s ease;
+    width: 300px;
+    height: 300px;
   }
 
     /* The Equation */
@@ -66,7 +64,7 @@ html, body {
     padding: 10px; /* Add some padding inside the latex box */
     width: fit-content; /* Fit the content to the latex box */
     margin: auto; /* center the latex box */
-    width: 50vh;
+    width: 100vh;
   }
 
   #latex-display{
@@ -75,19 +73,45 @@ html, body {
 
    /* The Buttons */
 
-  .button-container {
+   .button-container {
+    padding: 25px;
     display: flex;
     justify-content: center;
-    height: 10vh;
-    margin: 30px;
+    margin: 30px auto;
+    width: fit-content;
+    border-radius: 30px;
+    gap: 25px; /* Space between buttons */
   }
-
+  
   .button-container button {
-    margin: 0 10px;
-    padding: 20px 20px;
+    width: 175px; /* Matching image width */
+    height: 100px; /* Matching image height */
+    border: 4px solid #2374AB;
+    border-radius: 30px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
     font-size: 16px;
-    width: auto;
-    height: auto;
+    color: #2374AB; /* Matching border color */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: none;
+    font-size: 20px;
+  }
+  
+  .button-container button:hover {
+    background-color: #2374AB;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .button-container.button-circle button {
+    border-radius: 50%; 
   }
 
   /* The Top */
@@ -118,18 +142,68 @@ html, body {
    /* The Wrapper */
 
   .wrapper {
-    width: 200px; /* Set the desired width of the container */
-    height: 200px; /* Set the desired height of the container */
+    width: 250px; /* Set the desired width of the container */
+    height: 250px; /* Set the desired height of the container */
     display: flex; /* Enable flexbox for centering */
     justify-content: center; /* Center horizontally */
     align-items: center; /* Center vertically */
     overflow: hidden; /* Clip the image to the container */
-    border-radius: 60px;
+    border-radius: 10px;
   }
   
   .wrapper > img {
-    width: 100%; /* Make the image fill the container */
-    height: 100%; /* Make the image fill the container */
-    margin: auto;
+    width: 90%; /* Make the image fill the container */
+    height: 90%; /* Make the image fill the container */
     object-fit: cover; /* Maintain aspect ratio and cover the container */
+    margin: 5px;
+    border-radius: 10px;
+    border: 10px solid #2374AB;
+  }
+
+  /* The Nav Bar */
+
+  nav {
+    background-color: #333;
+    padding: 10px 20px;
+    transition: background 0.2s;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    font-size: 20px;
+  }
+
+  .nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  .nav-links li {
+    margin-right: 20px;
+  }
+
+  .nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    display: block;
+    transition: background 0.2s;
+    background-color: #33312E;
+  }
+
+  .nav-links li a:hover {
+    background-color: #575757;
+    border-radius: 4px;
+    transform: scale(1.1, 1.1); transform-origin: center;
+  }
+
+  .score {
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
   }
