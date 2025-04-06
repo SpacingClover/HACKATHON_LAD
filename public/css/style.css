@@ -60,7 +60,7 @@ html, body {
     background-color: #B4D2E7;
     border: 10px ridge #2374AB;
     padding: 10px;
-    margin: auto; 
+    margin: auto;
     width: fit-content;
     border-radius: 30px;
   }
@@ -138,22 +138,22 @@ html, body {
     align-items: center;
     justify-content: center;
   }
-  
+
    /* The Wrapper */
 
   .wrapper {
-    width: 250px; 
+    width: 250px;
     height: 250px;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    overflow: hidden; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
     border-radius: 10px;
 
   }
 
   .wrapper > img {
-    width: 90%; 
+    width: 90%;
     height: 90%;
     object-fit: cover;
     margin: 5px;
@@ -254,8 +254,19 @@ html, body {
   img.selected{
     border-color: yellow;
   }
-  
+
   #instructions{
     position: absolute;
     bottom: 0;
   }
+
+
+  /* Instructions */
+.instructions{
+  justify-content: center;
+  text-align: center;
+  background-color: #333;
+  color: white;
+  font-size:30px;
+  padding:20px;
+}
