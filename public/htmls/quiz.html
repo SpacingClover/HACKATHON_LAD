@@ -48,7 +48,7 @@
 
   <script>
 
-      let selectedImage = "-1";
+      let selectedImage = null;
 
       const image1 = document.getElementById('1');
       const image2 = document.getElementById('2');
@@ -59,47 +59,15 @@
       images.forEach(img => {
         img.addEventListener('click', () => {
           if (selectedImage) {
-            images[parseInt(selectedImage)-1].classList.remove('selected');
+            images[parseInt(selectedImage.id)-1].classList.remove('selected');
           }
           img.classList.add('selected');
-          selectedImage = img.id;
+          selectedImage = img;
         });
       });
 
-      document.getElementById('next-button').addEventListener('click', getNewQuestion);
-
-      async function getNewQuestion(){
-        const json = await getData("get_question");
-        for(let key in json){
-          if(key==="equation"){
-            document.getElementById('latex-display').innerHTML = json[key];
-          }
-          else if(key==="img_1"){
-            image1.src = "http://localhost:3000/assets/" + json[key];
-          }
-          else if(key==="img_2"){
-            image2.src = "http://localhost:3000/assets/" + json[key];
-          }
-          else if(key==="img_3"){
-            image3.src = "http://localhost:3000/assets/" + json[key];
-          }
-          else if(key==="img_4"){
-            image4.src = "http://localhost:3000/assets/" + json[key];
-          }
-        }
-        MathJax.typeset();
-        selectedImage = "-1";
-
-      }
-
-      document.getElementById('submit-button').addEventListener('click', () => {
-        console.log("submit button clicked");
-        if (selectedImage!="-1") {
-          console.log("User submitted image: " + selectedImage);
-        } else {
-          console.log("User did not select an image");
-        }
-      });
+      document.getElementById('next-button').addEventListener('click',getNewQuestion);
+      document.getElementById('submit-button').addEventListener('click',submitAnswer);
 
       getNewQuestion();
 
