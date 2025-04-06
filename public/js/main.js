@@ -49,9 +49,11 @@ async function getNewQuestion(){
 
 async function submitAnswer(){
   if(selectedImage){
-    let selectedAnswerIndex = parseInt(selectedImage.id)-1;
+    let selectedAnswerIndex = parseInt(selectedImage.id);
     console.log("User submitted image: " + selectedAnswerIndex);
-    let result = await getData("check_answer/" + selectedAnswerIndex.toString())
+    let url = "check_answer" + "?question_uid=" + question_uid.toString() + "&answer=" + selectedAnswerIndex.toString();
+    let result = await getData(url);
+    console.log(result["value"]);
   }
   else{
     console.log("User did not select an image");
