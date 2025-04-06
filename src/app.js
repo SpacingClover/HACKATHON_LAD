@@ -8,7 +8,9 @@ const port = 3000;
 
 const __dirname_org = path.dirname(new URL(import.meta.url).pathname);
 const __dirname =  __dirname_org.substring(1);
-const genAI = new GoogleGenerativeAI ('AIzaSyDTsyMVaXc8whJibBzyCLIT3lo08yGHKtQ');
+const genAI = new GoogleGenerativeAI ('AIzaSyCD1iSWUxyIdmFKOCavslLCTTA-hsZ2l4Q');
+
+let aimodel = "groq";
 
 const stored_question_data = [];
 // {
@@ -83,7 +85,7 @@ async function passtogemini(imagePath) {
 
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
-    const prompt = "approximate a equation to calculate the volume of the item in the picture! Only provide the final equation in the response. Use the naming convention as letter_ number. in the form v=. !!!!dont provide any information regarding what is in the picture!!! In latex text!!!";
+    const prompt = "approximate a equation to calculate the volume of the item in the picture! Only provide the final equation in the response. Use the naming convention as letter_ number. in the form v=. !!!!dont provide any information regarding what is in the picture!!! In latex text!!! Do not have any $ on the ends!!! all backslashes must be single backslashes! MUST BE VALID LATEX!!!!";
 
     const imageParts = [
       fileToGenerativePart(imagePath, "image/png"),
@@ -122,10 +124,11 @@ return img2;
 
 async function createQuestion() {
     const selectedImage = chooseimage(path.join(__dirname, '../public/assets'));
-    const latexEquation = '$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
+    // const latexEquation = '$$ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $$' //await passtogemini(selectedImage[0]);
+    const latexEquation =  await passtogemini(selectedImage[0]);
     const imglink = selectedImage[1]+ "/" +selectedImage[2];
 
-    console.log(imglink);
+    console.log(latexEquation);
 
     let unshuf_images= [imglink,rand_img_path_creator(),rand_img_path_creator(),rand_img_path_creator()];
     let images = shufflelist(unshuf_images);
@@ -152,7 +155,7 @@ async function createQuestion() {
       "img_2":images[1],
       "img_3":images[2],
       "img_4":images[3],
-      "equation":latexEquation,//the back slashes must be double backslashes
+      "equation":"$$"+latexEquation+"$$",//the back slashes must be double backslashes
       "uid":uid
     });
 }

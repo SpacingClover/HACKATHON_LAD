@@ -5,6 +5,8 @@ let question_uid = -1;
 let score = 0;
 let answered = false;
 
+let ai_model_to_use = "Gemini";
+
 async function getData(query){
   const url = serveraddress + query;
   console.log(url);
@@ -46,11 +48,11 @@ async function getNewQuestion(){
       question_uid = json[key];
     }
   }
-  MathJax.typeset();
   selectedImage = null;
   document.body.style.backgroundColor = "white";
   answered = false;
   resetStuff();
+  MathJax.typeset();
 }
 
 async function submitAnswer(){
