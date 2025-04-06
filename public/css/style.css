@@ -82,7 +82,7 @@ html, body {
     border-radius: 30px;
     gap: 25px; /* Space between buttons */
   }
-  
+
   .button-container button {
     width: 175px; /* Matching image width */
     height: 100px; /* Matching image height */
@@ -101,7 +101,7 @@ html, body {
     box-shadow: none;
     font-size: 20px;
   }
-  
+
   .button-container button:hover {
     background-color: #2374AB;
     color: white;
@@ -109,9 +109,9 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
   }
-  
+
   .button-container.button-circle button {
-    border-radius: 50%; 
+    border-radius: 50%;
   }
 
   /* The Top */
@@ -150,7 +150,7 @@ html, body {
     overflow: hidden; /* Clip the image to the container */
     border-radius: 10px;
   }
-  
+
   .wrapper > img {
     width: 90%; /* Make the image fill the container */
     height: 90%; /* Make the image fill the container */
@@ -206,4 +206,9 @@ html, body {
     color: white;
     font-weight: bold;
     font-size: 18px;
+  }
+
+  #instructions{
+    position: absolute;
+    bottom: 0;
   }
