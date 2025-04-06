@@ -209,7 +209,6 @@ html, body {
     font-size: 18px;
   }
 
-<<<<<<< HEAD
   /* Dropdown */
 
   .dropdown-content {
@@ -255,9 +254,8 @@ html, body {
   img.selected{
     border-color: yellow;
   }
-=======
+  
   #instructions{
     position: absolute;
     bottom: 0;
   }
->>>>>>> 9d2a8af64fbf9f98cbd573cac55dcd75563db230
