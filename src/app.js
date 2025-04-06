@@ -9,19 +9,18 @@ app.use(express.static(path.join(__dirname, '../public')));
 
 // Serve the static HTML file (e.g., index.html) from the 'public' folder
 app.get('/', (req, res) => {
-    switch (req.url) {
-        case '/':
-            // Directly send the index.html file from the public directory
-            res.sendFile(path.join(__dirname, '../public/htmls/quiz.html'));
-            // res.sendFile(path.join(__dirname, '..', '/public'));
-            break;
-        case '/question_data':
-            res.json({"thing":"hello world"});
-            break;
-        default:
-            res.status(404).send('404 Not Found');
-    }
+  res.sendFile(path.join(__dirname, '../public/htmls/quiz.html'));
+});
 
+app.get("/get_question", (req,res) => {
+  res.json({
+    "img_1":"FiveShapes/Table.png",
+    "img_2":"FourShapes/IceCream.png",
+    "img_3":"OneShape/Book.png",
+    "img_4":"OneShape/Orange.png",
+    "equation":"$$\\zeta(2) = \\frac{\\pi^2}{6}$$",
+    "uid":123
+  });
 });
 
 // Start the Express server
