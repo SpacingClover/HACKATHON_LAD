@@ -1,7 +1,6 @@
 html, body {
     height: 100%;
     margin: 0;
-    overflow: hidden;
   }
 
   body {
@@ -83,7 +82,7 @@ html, body {
     border-radius: 30px;
     gap: 25px; /* Space between buttons */
   }
-  
+
   .button-container button {
     width: 175px; /* Matching image width */
     height: 100px; /* Matching image height */
@@ -102,7 +101,7 @@ html, body {
     box-shadow: none;
     font-size: 20px;
   }
-  
+
   .button-container button:hover {
     background-color: #2374AB;
     color: white;
@@ -110,9 +109,9 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
   }
-  
+
   .button-container.button-circle button {
-    border-radius: 50%; 
+    border-radius: 50%;
   }
 
   /* The Top */
@@ -152,7 +151,7 @@ html, body {
     border-radius: 10px;
 
   }
-  
+
   .wrapper > img {
     width: 90%; 
     height: 90%;
@@ -210,6 +209,7 @@ html, body {
     font-size: 18px;
   }
 
+<<<<<<< HEAD
   /* Dropdown */
 
   .dropdown-content {
@@ -255,3 +255,9 @@ html, body {
   img.selected{
     border-color: yellow;
   }
+=======
+  #instructions{
+    position: absolute;
+    bottom: 0;
+  }
+>>>>>>> 9d2a8af64fbf9f98cbd573cac55dcd75563db230
