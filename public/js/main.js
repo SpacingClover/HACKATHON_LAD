@@ -5,7 +5,7 @@ let question_uid = -1;
 let score = 0;
 let answered = false;
 
-let ai_model_to_use = "gemini";
+let ai_model_to_use = "groq";
 
 async function getData(query){
   const url = serveraddress + query;
